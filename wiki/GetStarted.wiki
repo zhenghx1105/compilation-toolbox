@@ -1,0 +1,78 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Java source code compiler. It compiles given java class sources in memory and loads them into memory. It utilises Java Compiler API.
+
+= Details =
+
+=Usage:=
+
+==Simple source compilation==
+
+{{{
+    JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
+    JavaSourceCompiler.CompilationUnit compilationUnit = javaSourceCompiler.createCompilationUnit();
+    String javaSourceCode =  "package com.test.foo;
+" +
+      "public class Foo {
+" +
+      "        public static void main(String [] args) {
+" +
+      "            System.out.println("Hello world");
+" +
+      "        }
+" +
+      "    }";
+  
+    compilationUnit.addJavaSource("com.test.foo.Foo", sourceCode);
+    ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
+    Class fooClass = classLoader.loadClass("com.test.foo.Foo");
+
+}}}
+
+
+    
+==Java sources compilation with dependencies==
+
+`
+    JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
+    JavaSourceCompiler.CompilationUnit compilationUnit = javaSourceCompiler.createCompilationUnit();
+  
+    compilationUnit.addClassPathEntry("/Users/xxxx/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar");
+  
+    String iBarSource =  "package com.test;\n" +
+       "    public interface IBar {\n" +
+       "         public void execute();\n" +
+       "    }";
+  
+    compilationUnit.addJavaSource("com.test.IBar", iBarSource);
+  
+  
+    String barSource =  "package com.test;\n" +
+      "import javax.inject.Inject;\n" +
+      "public class Bar implements IBar {\n" +
+      "        private final String message;\n" +
+      "\n" +
+      "        @Inject\n" +
+      "        public Bar(String message) {\n" +
+      "            this.message = message;\n" +
+      "        }\n" +
+      "\n" +
+      "\n" +
+      "        @Override\n" +
+      "        public void execute() {\n" +
+      "            System.out.println(message);\n" +
+      "        }\n" +
+      "    }";
+  
+
+    compilationUnit.addJavaSource("com.test.IBar", barSource);
+  
+    ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
+    Class iBar = classLoader.loadClass("com.test.IBar");
+    Class bar = classLoader.loadClass("com.test.Bar");
+  
+`  
+    
+    
