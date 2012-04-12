@@ -2,9 +2,8 @@
 
 = Introduction =
 
-Java source code compiler. It compiles given java class sources in memory and loads them into memory. It utilises Java Compiler API.
+Java source code compiler. It compiles given java class sources in memory. It utilises Java Compiler API.
 
-= Details =
 
 =Usage:=
 
@@ -13,18 +12,12 @@ Java source code compiler. It compiles given java class sources in memory and lo
 {{{
     JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
     JavaSourceCompiler.CompilationUnit compilationUnit = javaSourceCompiler.createCompilationUnit();
-    String javaSourceCode =  "package com.test.foo;
-" +
-      "public class Foo {
-" +
-      "        public static void main(String [] args) {
-" +
-      "            System.out.println("Hello world");
-" +
-      "        }
-" +
+    String javaSourceCode =  "package com.test.foo;\n" +
+      "public class Foo {\n" +
+      "        public static void main(String [] args) {\n" +
+      "            System.out.println("Hello world");\n" +
+      "        }\n" +
       "    }";
-  
     compilationUnit.addJavaSource("com.test.foo.Foo", sourceCode);
     ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
     Class fooClass = classLoader.loadClass("com.test.foo.Foo");
@@ -35,7 +28,7 @@ Java source code compiler. It compiles given java class sources in memory and lo
     
 ==Java sources compilation with dependencies==
 
-`
+{{{
     JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
     JavaSourceCompiler.CompilationUnit compilationUnit = javaSourceCompiler.createCompilationUnit();
   
@@ -73,6 +66,6 @@ Java source code compiler. It compiles given java class sources in memory and lo
     Class iBar = classLoader.loadClass("com.test.IBar");
     Class bar = classLoader.loadClass("com.test.Bar");
   
-`  
+}}}
     
     
