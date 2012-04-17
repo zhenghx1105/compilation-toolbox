@@ -1,8 +1,7 @@
 #summary One-sentence summary of this page.
-
 = Introduction =
 
-Java source code compiler. It compiles given java class sources in memory. It utilises Java Compiler API.
+Java runtime source code compiler and loader. It simply compiles a given source code and loads its byte code into memory. It utilizes Java Compiler API (javax.tools).
 
 
 =Usage:=
